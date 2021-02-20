@@ -12,7 +12,7 @@ public class Productor extends Thread
 	private Producto produc;								// ... Producto que está almacenando
 	private int MAX_PRODUCTOS;								// ... Máxima cantidad de productos que va a almacenar.
 	
-	// .. Constructor: Todo se define como parametro.
+	// .. Constructor: Todo se define como parámetro.
 	
 	public Productor(int pID, Producto pProduc, int max, BuzonProductores deTodos) 
 	{

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class BuzonConsumidores 
 {
-	// ... Attributos
+	// ... Atributos
 	
 	private ArrayList<Producto> buff;					// .. Buffer para guardar elementos de tipo producto
 	private int nMax;									// .. Capacidad máxima del buffer 
@@ -36,13 +36,13 @@ public class BuzonConsumidores
 				if(buff.size() < nMax) {
 					buff.add(transportado);
 					continuar = false;
-					System.out.println("Intermediario (CONSUMIDOR) --> El thread con id " + idThread + " ALMACENO el producto " + transportado.getTipo() + ".  ------- Ahora hay: " + buff.size() + " elementos en el 'buff' de consumidores.");
+					System.out.println("Intermediario CONSUMIDOR con id " + idThread + " ALMACENÓ el producto " + transportado.getTipo() + ".  --> Ahora hay: " + buff.size() + " elementos en el 'buff' de consumidores.");
 				}
 			}
 			if(continuar){
 				synchronized (lleno) {
 					try {
-						System.out.println("Intermediario (CONSUMIDOR) --> El thread con id " + idThread + " esta en espera pasiva para almacenar. ------- Hay: " + buff.size() + "  elementos en el 'buff' de consumidores.");
+						System.out.println("Intermediario CONSUMIDOR con id " + idThread + " --> está en espera pasiva para almacenar. --> Hay: " + buff.size() + "  elementos en el 'buff' de consumidores.");
 						lleno.wait();
 					}
 					catch(Exception e) {}
@@ -83,21 +83,20 @@ public class BuzonConsumidores
 						if(buff.get(conti).getTipo().equals(buscado.getTipo())) {
 							producto = buff.remove(conti);
 							continuar = false;
-							System.out.println("Consumidor --> El thread con id " + idThread + " REMOVIO el producto " + producto.getTipo() + ". ------- Ahora hay: " + buff.size() + " elementos en el 'buff' de consumidores.");
+							System.out.println("Consumidor con id: " + idThread + " --> REMOVIÓ el producto " + producto.getTipo() + ". --> Ahora hay: " + buff.size() + " elementos en el 'buff' de consumidores.");
 						}
 						conti++;
 					}
 				}
 			}
 			if(continuar) {
-				System.out.println("Consumidor --> El thread con id " + idThread + " esta en espera semi-activa para retirar. ------- Hay: " + buff.size() + " elementos en el 'buff' de productores.");
+				System.out.println("Consumidor con id: " + idThread + " --> está en espera semi-activa para retirar. --> Hay: " + buff.size() + " elementos en el 'buff' de productores.");
 				Thread.yield();  		// .. ESPERA SEMI ACTIVA
 			}
 		}
 		synchronized (lleno) {
 			try {
 				lleno.notify();
-				//.. System.out.println("Consumidor --> " + idThread + " Notifica lleno");
 			}
 			catch(Exception e) {}
 		}

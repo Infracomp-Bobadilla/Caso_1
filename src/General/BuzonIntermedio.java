@@ -36,13 +36,13 @@ public class BuzonIntermedio
 				if(buff.size() < nMax) {
 					buff.add(retirado);
 					continuar = false;
-					System.out.println("Intermediario (MEDIO CAMPO) --> El thread con id " + idThread + " ALMACENO el producto " + retirado.getTipo() + ".  ------- Ahora hay: " + buff.size() + " elementos en el 'buff' intermedio.");
+					System.out.println("Intermediario MEDIO CAMPO con id: " + idThread + "--> ALMACENÓ el producto " + retirado.getTipo() + ".  --> Ahora hay: " + buff.size() + " elementos en el 'buff' intermedio.");
 				}
 			}
 			if(continuar){
 				synchronized (lleno) {
 					try {
-						System.out.println("Intermediario (MEDIO CAMPO) --> El thread con id " + idThread + " esta en espera pasiva para almacenar. ------- Hay: " + buff.size() + "  elementos en el 'buff' intermedio.");
+						System.out.println("Intermediario MEDIO CAMPO con id: " + idThread + "--> está en espera pasiva para almacenar. ------- Hay: " + buff.size() + "  elementos en el 'buff' intermedio.");
 						lleno.wait();
 					}
 					catch(Exception e) {}
@@ -53,7 +53,6 @@ public class BuzonIntermedio
 		synchronized (vacio) {
 			try {
 				vacio.notify();
-				// .. System.out.println("Medio Campo --> " + idThread + " Notifica vacio");
 			}
 			catch(Exception e) {}
 		}
@@ -75,13 +74,13 @@ public class BuzonIntermedio
 				if(buff.size() > 0) {
 					producto = buff.remove(0);
 					continuar = false;
-					System.out.println("Intermediario (MEDIO CAMPO) --> El thread con id " + idThread + " REMOVIO el producto " + producto.getTipo() + ". ------- Ahora hay: " + buff.size() + " elementos en el 'buff' intermedio.");
+					System.out.println("Intermediario MEDIO CAMPO con id: " + idThread + " --> REMOVIÓ el producto " + producto.getTipo() + ". --> Ahora hay: " + buff.size() + " elementos en el 'buff' intermedio.");
 				}
 			}
 			if(continuar) {
 				synchronized (vacio) {
 					try {
-						System.out.println("Intermediario (MEDIO CAMPO) --> El thread con id " + idThread + " esta en espera pasiva para remover. ------- Hay: " + buff.size() + "  elementos en el 'buff' intermedio.");
+						System.out.println("Intermediario MEDIO CAMPO con id: " + idThread + " --> está en espera pasiva para remover. --> Hay: " + buff.size() + "  elementos en el 'buff' intermedio.");
 						vacio.wait();
 					}
 					catch(Exception e) {}
@@ -91,13 +90,11 @@ public class BuzonIntermedio
 		synchronized (lleno) {
 			try {
 				lleno.notify();
-				// .. System.out.println("Medio Campo --> " + idThread + " Notifica lleno");
 			}
 			catch(Exception e) {}
 		}
 
 		return producto;
 	}
-
 
 }

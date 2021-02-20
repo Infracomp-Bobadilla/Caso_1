@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class BuzonProductores 
 {
-	// ... Attributos
+	// ... Atributos
 	
 	private ArrayList<Producto> buff;		// .. Buffer para guardar elementos de tipo producto
 	private int nMax;						// .. Capacidad máxima del buffer 
@@ -38,15 +38,16 @@ public class BuzonProductores
 				if(buff.size() < nMax) {
 					buff.add(produc);
 					continuar = false;
-					System.out.println("Productor --> El thread con id " + idThread + " ALMACENO el producto " + produc.getTipo() + ".  ------- Ahora hay: " + buff.size() + " elementos en el 'buff' de productores.");
+					System.out.println("Productor con id: " + idThread + " -->ALMACENÓ un producto " + produc.getTipo() + ".  --> Ahora hay: " + buff.size() + " elementos en el 'buff' de productores.");
 				}
 			}
 			if(continuar){
-				System.out.println("Productor --> El thread con id " + idThread + " esta en espera semi-activa para almacenar. ------- Hay: " + buff.size() + " elementos en el 'buff' de productores.");
+				System.out.println("Productor con con id: " + idThread + " -->está en espera semi-activa para almacenar. --> Hay: " + buff.size() + " elementos en el 'buff' de productores.");
 				Thread.yield();  // .. ESPERA SEMI ACTIVA
 			}
 		}
 
+		//Cuando logre almacenar notifica a los intermediarios que estén dormidos que sigan. 
 		synchronized (vacio) {
 			try {
 				vacio.notify();
@@ -71,13 +72,13 @@ public class BuzonProductores
 				if(buff.size() > 0) {
 					producto = buff.remove(0);
 					continuar = false;
-					System.out.println("Intermediario (PRODUCTOR) --> El thread con id " + idThread + " REMOVIO el producto " + producto.getTipo() + ". ------- Ahora hay: " + buff.size() + " elementos en el 'buff' de productores.");
+					System.out.println("Intermediario PRODUCTOR con id: " + idThread + " --> REMOVIÓ el producto " + producto.getTipo() + ". --> Ahora hay: " + buff.size() + " elementos en el 'buff' de productores.");
 				}
 			}
 			if(continuar) {
 				synchronized (vacio) {
 					try {
-						System.out.println("Intermediario (PRODUCTOR) --> El thread con id " + idThread + " esta en espera pasiva para remover. ------- Hay: " + buff.size() + "  elementos en el 'buff' de productores.");
+						System.out.println("Intermediario PRODUCTOR con id: " + idThread + " --> está en espera pasiva para remover. --> Hay: " + buff.size() + "  elementos en el 'buff' de productores.");
 						vacio.wait();
 					}
 					catch(Exception e) {}
