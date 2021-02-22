@@ -10,7 +10,7 @@ public class Main {
 		
 		System.out.println("-------------------------------------------------------");
 		System.out.println("..... CASO 1 - PRODCUTOR & CONSUMIDOR .....");
-		System.out.println(".. Juan José Beltrán - Santiago Bobadilla ..");
+		System.out.println(".. Juan José Beltrán Ruiz - Santiago Bobadilla ..");
 		System.out.println("-------------------------------------------------------");
 		
 		// .. Atributos desde lectura

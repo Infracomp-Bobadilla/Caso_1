@@ -49,14 +49,6 @@ public class BuzonConsumidores
 				}
 			}
 		}
-
-//		synchronized (vacio) {
-//			try {
-//				vacio.notify();
-//				System.out.println("Consumidor --> " + idThread + " Notifica vacio");
-//			}
-//			catch(Exception e) {}
-//		}
 	}
 	
 	// .... Retirar un producto por medio del consumidor.

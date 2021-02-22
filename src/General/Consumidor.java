@@ -28,5 +28,7 @@ public class Consumidor extends Thread
 		for(int i = 0; i < this.MAX_PRODUCTOS; i++) {
 			fin.retirar(this.id, this.produc);
 		}
+		
+		System.out.println("El consumidor con id: " + this.id +" ha terminado de consumir. Sale del sistema");
 	}
 }

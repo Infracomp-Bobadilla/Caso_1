@@ -29,6 +29,7 @@ public class Productor extends Thread
 		for(int i = 0; i < this.MAX_PRODUCTOS; i++) {
 			inicio.almacenar(this.produc, this.id);
 		}
+		System.out.println("El productor con id: " + this.id +" ha terminado de colocar productos en el buzón. Sale del sistema");
 	}
 	
 }

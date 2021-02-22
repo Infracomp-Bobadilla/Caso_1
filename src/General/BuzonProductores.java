@@ -85,14 +85,6 @@ public class BuzonProductores
 				}
 			}
 		}
-		
-//		synchronized (lleno) {
-//			try {
-//				lleno.notify();
-//				System.out.println("Productores --> " + idThread + " Notifica lleno");
-//			}
-//			catch(Exception e) {}
-//		}
 
 		return producto;
 	}
